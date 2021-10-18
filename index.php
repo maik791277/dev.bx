@@ -1,3 +1,4 @@
 <?php
 
-echo 'Hello GitHub!';
+require 'Content/SortingFilms.php';
+
