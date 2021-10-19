@@ -6,22 +6,21 @@ require 'movies.php';
 $i=1;
 
 echo "Ведите ваш возраст: ";
-$age=readline();
+$age = readline();
 
 if (is_numeric($age)) {
 	echo "Ваш возраст: $age+ " . "\n"."Вам доступны следующие фильмы c возрастным рейтингом $age+ и ниже:" . "\n";
-}else{
+} else {
 	echo "Ведите только ваш возраст (цаифрами)"; exit();
 }
 
-function FormFilling (array $movies): string
-{
-	return ". {$movies['title']} ({$movies['release_year']}), {$movies['age_restriction']}+. Rating - {$movies['rating']} \n";
+function formatMovie (array $movie): string {
+	return ". {$movie['title']} ({$movie['release_year']}), {$movie['age_restriction']}+. Rating - {$movie['rating']} \n";
 }
 
-foreach($movies as $Films)
-{
-	if($Films["age_restriction"] <= $age)
-
-		echo $i++.FormFilling($Films);
+foreach($movies as $movie) {
+	if($movie["age_restriction"] <= (int)$age) {
+		echo $i++.formatMovie($movie);
+	}
 }
+
