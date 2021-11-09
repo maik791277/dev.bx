@@ -6,12 +6,6 @@ body {
 	font-family: Algerian, sans-serif;
 }
 
-
-
-
-
-
-
 .logo {
 	padding-top: 52px;
 	display: block;
@@ -34,10 +28,18 @@ body {
 
 }
 
+
 .menu {
-	display: block;
+	height: 70%;
+	overflow: auto;
 	margin: 30px;
 }
+
+.menu::-webkit-scrollbar {
+	width: 0;
+	background: transparent;
+}
+
 
 .menu-item {
 	display: block;
@@ -76,18 +78,12 @@ body {
 }
 
 
-
-
-
-
-
 .container {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
 	background: #ccc;
 }
-
 
 
 .header {
@@ -175,9 +171,6 @@ body {
 }
 
 
-
-
-
 .content {
 	overflow: auto;
 	background: #ccc;
@@ -187,7 +180,6 @@ body {
 }
 
 
-
 .card {
 	position: relative;
 	display: inline-block;
@@ -195,19 +187,79 @@ body {
 	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 	transition: 0.3s;
 	width: 370px;
-	height: 700px;
+	height: 760px;
 	border-radius: 20px;
 	background-color: #fff;
 
+
+	animation-name: Appearance;
+	animation-duration: 2s;
+	animation-timing-function: cubic-bezier(.1, -.6, .2, 0);
 }
+
+@-webkit-keyframes Appearance {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-o-keyframes Appearance {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes Appearance {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes Appearance {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .img-card {
 	display: block;
-	height: 430px;
+	height: 500px;
 	background-size: cover;
 	border-radius: 20px 20px 0 0;
-	transition: 0.2s;
+	background-repeat: no-repeat;
 }
 
 .container-card h4 {
@@ -237,7 +289,7 @@ body {
 
 	margin: 5px 20px 23px 20px;
 	width: 330px;
-	height: 100px;
+	height: 60px;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
 	line-height: 20px;
@@ -309,12 +361,12 @@ body {
 
 .card-button1 {
 	width: 221px;
-	height: 56px;
+	height: 55px;
 	font-family: 'Open Sans', sans-serif;
 	font-style: normal;
 	font-weight: bold;
 	font-size: 18px;
-	line-height: 50px;
+	line-height: 55px;
 	border: none;
 	/* identical to box height, or 311% */
 
@@ -327,3 +379,84 @@ body {
 }
 
 
+
+
+
+.info-card-movies123{
+	position: absolute;
+	width: 1170px;
+	height: 985px;
+	left: 444px;
+	top: 128px;
+	background-color: #4ee7b0;
+}
+
+
+.al1{
+	position:absolute;
+	bottom:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.expandable-list {
+	max-height: 0px;
+	overflow: hidden;
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
+
+.expand-genres-button {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+}
+
+.expand-genres-label {
+	display: flex;
+	height: 70px;
+	padding: 0 15px;
+	text-decoration: none;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 22px;
+	align-items: center;
+	text-transform: uppercase;
+	color: #fff;
+	cursor: pointer;
+}
+
+.expand-genres-button:checked + .expand-genres-label {
+	max-height: 0;
+	overflow: hidden;
+	border: none;
+}
+
+.expand-genres-button:checked ~ .expandable-list {
+	max-height: 100%;
+	transition: 0.2s;
+}

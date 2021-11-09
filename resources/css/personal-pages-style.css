@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+
+.personal-page {
+	display: block;
+	width: 1170px;
+	background: #fff;
+	margin: 40px 44px;
+}
+
+.personal-page--header {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+}
+
+.personal-page--header--title {
+	margin: 35px 48px;
+}
+
+.personal-page--header--title h2 {
+	margin-bottom: 8px;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 48px;
+	line-height: 65px;
+
+	color: #333;
+}
+
+.personal-page--header--title h5 {
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
+
+	color: #999;
+}
+
+.personal-page--header--hr {
+	margin: 0 46px;
+}
+
+.age-restriction {
+	border: 3px solid #ccc;
+	box-sizing: border-box;
+	border-radius: 7px;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 33px;
+
+	color: #999;
+}
+
+/*Иконка избранного*/
+.personal-page--header--favorites-icon {
+	position: relative;
+	width: 43px;
+	height: 36px;
+	margin-top: 57px;
+	margin-right: 40px;
+}
+
+/*.like-icon{*/
+/*	z-index: 5;*/
+/*	position: absolute;*/
+/*	width: 43px;*/
+/*	height: 36px;*/
+/*}*/
+.like-icon--hover {
+	position: absolute;
+	width: 43px;
+	height: 36px;
+	z-index: 9;
+
+	opacity: 0;
+	transition: .2s;
+}
+
+.personal-page--header--favorites-icon:hover .like-icon--hover {
+	opacity: 1;
+}
+
+/*Иконка избранного*/
+.personal-page-main {
+	margin: 32px 45px 56px 43px;
+	display: flex;
+}
+
+.personal-page-main--poster {
+	width: 470px;
+	height: 665px;
+	border: 12px solid #f2f2f2;
+	display: inline-block;
+	background-size: contain;
+	background-repeat: no-repeat;
+	margin-bottom: 56px;
+}
+
+.personal-page-main--about {
+	width: 577px;
+	margin-left: 33px;
+	position: relative;
+}
+
+.movie-rating {
+	display: flex;
+	position: absolute;
+	justify-content: space-around;
+	top: -10px;
+	right: 95px;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 30px;
+	color: #fff;
+	background: #e78818;
+	width: 56px;
+	height: 56px;
+	border-radius: 28px;
+	align-items: center;
+	text-align: center;
+}
+
+/*Шкала рейтинга*/
+.rating-area {
+	display: inline-block;
+	margin-bottom: 20px;
+	width: 420px;
+	overflow: hidden;
+}
+
+.rating-area:not(:checked) > input {
+	display: none;
+}
+
+.rating-area:not(:checked) > label {
+	float: right;
+	width: 42px;
+	padding: 0;
+	/*cursor: pointer;*/
+	font-size: 32px;
+	line-height: 32px;
+	color: lightgrey;
+	text-shadow: 1px 1px #bbb;
+}
+
+.rating-area:not(:checked) > label:before {
+	content: '■';
+}
+
+.rating-area > input:checked ~ label {
+	color: #e78818;
+	text-shadow: 1px 1px #c60;
+}
+
+.rate-area > label:active {
+	position: relative;
+}
+
+/*Шкала рейтинга конец*/
+.personal-page-main--about--rating {
+	display: block;
+	width: 336px;
+	height: 55px;
+	background: #999;
+	margin-bottom: 14px;
+}
+
+.personal-page-main--about h3 {
+	margin-bottom: 22px;
+	display: block;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	line-height: 33px;
+
+	color: #333;
+}
+
+.personal-page-main--about--table {
+	display: flex;
+}
+
+.personal-page-main--about--table-left {
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+}
+
+.personal-page-main--about--table-left span {
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 22px;
+	margin-bottom: 15px;
+
+	color: #666;
+}
+
+.personal-page-main--about--table-right {
+	display: flex;
+	flex-direction: column;
+}
+
+.personal-page-main--about--table-right span {
+	width: 392px;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 22px;
+	margin-bottom: 15px;
+
+	color: #000;
+}
+
+.personal-page-main--about--description {
+	width: 577px;
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 28px;
+
+	color: #000;
+}
