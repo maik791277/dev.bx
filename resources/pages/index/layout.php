@@ -1,12 +1,11 @@
 <?php
 /** @var array $genres */
-
+/** @var string $currentPage */
 /** @var string $current_page */
 /** @var array $movies */
 /** @var string $content */
 /** @var array $config */
 
-$currentPage = []
 ?>
 
 <!doctype html>
@@ -27,20 +26,14 @@ $currentPage = []
 		<img class="logo" src="resources/img/Group3.png" alt="Group3">
 		<ul class="menu">
 			<li class="menu-item">
-				<a style="<?php
-				if ($_SERVER['REQUEST_URI'] === $config['menu']['Главная'])
-				{
-					echo 'background-color: rgba(255, 255, 255, 0.05);';
-				} ?>" href="<?= $config['menu']['Главная'] ?>">Главная</a>
+				<a class="<?php
+				if ($currentPage === $config['menu']['Главная']){echo 'active_zone';} ?>" href="<?= $config['menu']['Главная'] ?>">Главная</a>
 			</li>
 			<?php
 			foreach (array_slice($genres, 0, 2) as $key => $genre):?>
 				<li class="menu-item">
-					<a style="<?php
-					if ($key === $current_page)
-					{
-						echo 'background-color: rgba(255, 255, 255, 0.05);';
-					} ?>" href="/?genre=<?= $key ?>"><?php
+					<a class="<?php
+					if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php
 						echo $genre ?></a>
 				</li>
 			<?php
@@ -52,11 +45,8 @@ $currentPage = []
 					<?php
 					foreach (array_slice($genres, 2, -1) as $key => $genre):?>
 						<li class="menu-item">
-							<a style="<?php
-							if ($key === $current_page)
-							{
-								echo 'background-color: rgba(255, 255, 255, 0.05);';
-							} ?>" href="/?genre=<?= $key ?>"><?php
+							<a class="<?php
+							if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php
 								echo $genre ?></a>
 						</li>
 					<?php
@@ -66,21 +56,15 @@ $currentPage = []
 			<?php
 			foreach (array_slice($genres, -1) as $key => $genre):?>
 				<li class="menu-item">
-					<a style="<?php
-					if ($key === $current_page)
-					{
-						echo 'background-color: rgba(255, 255, 255, 0.05);';
-					} ?>" href="/?genre=<?= $key ?>"><?php
+					<a class="<?php
+					if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php
 						echo $genre ?></a>
 				</li>
 			<?php
 			endforeach; ?>
 			<li class="menu-item">
-				<a style="<?php
-				if ($_SERVER['REQUEST_URI'] === $config['menu']['Избранные'])
-				{
-					echo 'background-color: rgba(255, 255, 255, 0.05);';
-				} ?>" href="<?= $config['menu']['Избранные'] ?>">Избраное</a>
+				<a class="<?php
+				if ($currentPage === $config['menu']['Избранные']){echo 'active_zone';} ?>" href="<?= $config['menu']['Избранные'] ?>">Избраное</a>
 			</li>
 		</ul>
 	</div>

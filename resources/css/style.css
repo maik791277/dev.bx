@@ -460,3 +460,8 @@ li {
 	max-height: 100%;
 	transition: 0.2s;
 }
+
+
+.active_zone{
+	background-color: rgba(255, 255, 255, 0.05)
+}

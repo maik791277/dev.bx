@@ -1,12 +1,10 @@
 <?php
 /** @var array $movie_details */
-
+/** @var int $movie_id */
 /** @var array $movies */
 
-$movie_id = (int)$_GET['id'];
-$movie_details = $movies[$movie_id - 1];
 
-if ($movie_id <= 0 or $movie_details == null)
+if (!$movie_details)
 {
 	echo '404 такова фильма нет';
 }
