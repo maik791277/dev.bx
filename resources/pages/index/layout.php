@@ -62,7 +62,7 @@
 	</div>
 	<div class="container">
 		<div class="header">
-			<form class="search" method="get">
+			<form class="search" action="http://dev.bx" method="get">
 				<img src="resources/img/search1.png" alt="search1">
 				<label><input class="search-field" type="search" name="search" placeholder="Поиск по каталогу..."></label>
 				<input class="search-submit-find" type="submit" value="ИСКАТЬ">
