@@ -22,13 +22,12 @@ else
 }
 
 
-// if	($_GET['search'])
+// if	(isset($_GET['search']))
 // {
 // 	$new_movies = [];
 // 	foreach ($movies as $item)
 // 	{
-// 		echo $item['title'];
-// 		if ( stristr($item['title'], $_GET['search'])!== false)       я не понимаю почему поиск не работает!!!
+// 		if ( stristr($item['title'], $_GET['search'])!== false)  поиск работает но есть много касиков 1.прри ведение названия и нажатия на кнопку поиск и после вывода фильма нажать на пустой поиск будут ошибки
 // 		{
 // 			array_push($new_movies,$item);
 // 		}
