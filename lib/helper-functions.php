@@ -44,7 +44,18 @@ function getMovie(array $movies, $id)
 }
 
 
-
-
+function movieSearch( array $movies , string $searcher)
+{
+	$new_movies = [];
+	foreach ($movies as $item)
+	{
+		if ( mb_stristr($item['title'], $searcher)!== false)
+		{
+			$new_movies[] = $item;
+		}
+		$movies = $new_movies;
+	}
+	return $movies;
+}
 
 

@@ -21,25 +21,17 @@ else
 	$genre = '';
 }
 
-
-// if	(isset($_GET['search']))
-// {
-// 	$new_movies = [];
-// 	foreach ($movies as $item)
-// 	{
-// 		if ( stristr($item['title'], $_GET['search'])!== false)  поиск работает но есть много касиков 1.прри ведение названия и нажатия на кнопку поиск и после вывода фильма нажать на пустой поиск будут ошибки
-// 		{
-// 			array_push($new_movies,$item);
-// 		}
-// 		$movies = $new_movies;
-// 	}
-// }
-
+if (isset($_GET['search']))
+{
+	if (strlen($_GET['search']) > 0)
+	{
+		$movies = movieSearch($movies, $_GET['search']);
+	}
+}
 
 $contentPage = renderTemplate("./resources/pages/index/content.php", [
 	"movies" => $movies,
 ]);
-
 
 
 renderLayout($contentPage, [
