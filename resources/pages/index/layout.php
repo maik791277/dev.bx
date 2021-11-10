@@ -26,15 +26,12 @@
 		<img class="logo" src="resources/img/Group3.png" alt="Group3">
 		<ul class="menu">
 			<li class="menu-item">
-				<a class="<?php
-				if ($currentPage === $config['menu']['Главная']){echo 'active_zone';} ?>" href="<?= $config['menu']['Главная'] ?>">Главная</a>
+				<a class="<?php if ($currentPage === $config['menu']['Главная']){echo 'active_zone';} ?>" href="<?= $config['menu']['Главная'] ?>">Главная</a>
 			</li>
 			<?php
 			foreach (array_slice($genres, 0, 2) as $key => $genre):?>
 				<li class="menu-item">
-					<a class="<?php
-					if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php
-						echo $genre ?></a>
+					<a class="<?php if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php echo $genre ?></a>
 				</li>
 			<?php
 			endforeach; ?>
@@ -45,9 +42,7 @@
 					<?php
 					foreach (array_slice($genres, 2, -1) as $key => $genre):?>
 						<li class="menu-item">
-							<a class="<?php
-							if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php
-								echo $genre ?></a>
+							<a class="<?php if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php echo $genre ?></a>
 						</li>
 					<?php
 					endforeach; ?>
@@ -56,15 +51,12 @@
 			<?php
 			foreach (array_slice($genres, -1) as $key => $genre):?>
 				<li class="menu-item">
-					<a class="<?php
-					if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php
-						echo $genre ?></a>
+					<a class="<?php if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php echo $genre ?></a>
 				</li>
 			<?php
 			endforeach; ?>
 			<li class="menu-item">
-				<a class="<?php
-				if ($currentPage === $config['menu']['Избранные']){echo 'active_zone';} ?>" href="<?= $config['menu']['Избранные'] ?>">Избраное</a>
+				<a class="<?php if ($currentPage === $config['menu']['Избранные']){echo 'active_zone';} ?>" href="<?= $config['menu']['Избранные'] ?>">Избраное</a>
 			</li>
 		</ul>
 	</div>

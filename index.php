@@ -13,28 +13,13 @@ $currentPage=$_SERVER['REQUEST_URI'];
 
 if (isset($_GET['genre']))
 {
-	$movies = filter_movies($movies, $_GET['genre'],$genres);
+	$movies = filterMovies($movies, $_GET['genre'],$genres);
 	$genre = $_GET['genre'];
 }
 else
 {
 	$genre = '';
 }
-
-// if ($_GET['genre'])
-// {
-// 	$new_movies = [];
-// 	foreach ($movies as $key => $item)
-// 	{
-// 		$genre_key = $genres[$_GET['genre']];
-// 		if (in_array($genre_key, $item['genres']))
-// 		{
-// 			$new_movies[] = $item;
-// 		}
-// 		$movies = $new_movies;
-// 	}
-// }
-
 
 
 // if	($_GET['search'])

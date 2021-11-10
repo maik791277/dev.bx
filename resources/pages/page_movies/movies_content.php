@@ -7,6 +7,7 @@
 if (!$movie_details)
 {
 	echo '404 такова фильма нет';
+	exit();
 }
 
 $rating = floor($movie_details['rating'])

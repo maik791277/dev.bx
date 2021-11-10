@@ -14,7 +14,7 @@ function convertToHoursMins($time, $format = '%02d:%02d')
 
 
 
-function filter_movies( array $movies, string $genre, array $genres)
+function filterMovies( array $movies, string $genre, array $genres)
 {
 	$new_movies = [];
 	foreach ($movies as $key => $item)
@@ -32,11 +32,11 @@ function filter_movies( array $movies, string $genre, array $genres)
 
 
 
-function get_movie(array $movies, $id)
+function getMovie(array $movies, $id)
 {
 	foreach ($movies as $movie)
 	{
-		if ($movie['id'] == $id)
+		if ($movie['id'] === (int)$id)
 		{
 			return $movie;
 		}
