@@ -1,28 +1,8 @@
 <?php
 
-function getMovieFromDB($db_res, array $genres, $genre): array
-{
-	$result = [];
-	$notFilteredGenre = getDataFromDb();
-	$filteredGenre = getDataFromDb() . "\n" . 'WHERE ' . $genre . ' IN (SELECT mg.GENRE_ID
-           FROM movie_genre AS mg
-           WHERE mg.MOVIE_ID = movie.ID);';
-	$query = $genre === "" ? $notFilteredGenre : $filteredGenre;
 
-	$mysqli_result = mysqli_query($db_res, $query);
-	if ($mysqli_result === false)
-	{
-		trigger_error();
-	}
-	while ($row = $mysqli_result->fetch_assoc())
-	{
-		$row["id_genres"] = getNamesByGenres($genres, $row["id_genres"], ",");
-		$result[$row["ID"]] = $row;
-	}
-	return $result;
-}
 
-function getDataFromDb(): string
+function DataFromDb(): string
 {
 	return 'SELECT movie.ID,
        movie.TITLE,
@@ -43,10 +23,10 @@ FROM movie
 	     INNER JOIN director d on movie.DIRECTOR_ID = d.ID';
 }
 
-function getMovieFromDbById($db_res, $id): array
+function MovieFromDbById($db_res, $id): array
 {
 	$result = [];
-	$query = getDataFromDb() . "\n" . 'WHERE ' . $id . ' = movie.ID;';
+	$query = DataFromDb() . "\n" . 'WHERE ' . $id . ' = movie.ID;';
 	$mysqli_result = mysqli_query($db_res, $query);
 	if ($mysqli_result === false)
 	{
@@ -54,13 +34,33 @@ function getMovieFromDbById($db_res, $id): array
 	}
 	while ($row = $mysqli_result->fetch_assoc())
 	{
-		$row["id_actor"] = getNamesById($db_res, $row["id_actor"], ",");
+		$row["id_actor"] = NamesById($db_res, $row["id_actor"], ",");
 		$result[$row["ID"]] = $row;
 	}
 	return call_user_func_array('array_merge', $result);
 }
+function MovieFromDB($db_res, array $genres, $genre): array
+{
+	$result = [];
+	$notFilteredGenre = DataFromDb();
+	$filteredGenre = DataFromDb() . "\n" . 'WHERE ' . $genre . ' IN (SELECT mg.GENRE_ID
+           FROM movie_genre AS mg
+           WHERE mg.MOVIE_ID = movie.ID);';
+	$query = $genre === "" ? $notFilteredGenre : $filteredGenre;
 
-function getNamesById($db_res, string $id, string $separator): array
+	$mysqli_result = mysqli_query($db_res, $query);
+	if ($mysqli_result === false)
+	{
+		trigger_error();
+	}
+	while ($row = $mysqli_result->fetch_assoc())
+	{
+		$row["id_genres"] = NamesByGenres($genres, $row["id_genres"], ",");
+		$result[$row["ID"]] = $row;
+	}
+	return $result;
+}
+function NamesById($db_res, string $id, string $separator): array
 {
 	$explodeArray = explode($separator, $id);
 	$query = 'SELECT * from actor;';
@@ -75,7 +75,7 @@ function getNamesById($db_res, string $id, string $separator): array
 	return $explodeArray;
 }
 
-function getGenresFromDB($db_res): array
+function GenresFromDB($db_res): array
 {
 	$query = "SELECT * FROM GENRE;";
 	$mysqli_result = mysqli_query($db_res, $query);
@@ -92,7 +92,7 @@ function getGenresFromDB($db_res): array
 }
 
 
-function getNamesByGenres($gen, string $id, string $separator): array
+function NamesByGenres($gen, string $id, string $separator): array
 {
 	$explodeArray = explode($separator, $id);
 	foreach ($explodeArray as &$value)

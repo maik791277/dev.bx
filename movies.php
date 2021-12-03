@@ -12,8 +12,8 @@ error_reporting(-1);
 
 $connecting_database = dbConnect($config);
 $movieId = (int)$_GET['id'];
-$personalDataMovie = getMovieFromDbById($connecting_database, $movieId);
-$genres = getGenresFromDB($connecting_database);
+$personalDataMovie = MovieFromDbById($connecting_database, $movieId);
+$genres = GenresFromDB($connecting_database);
 
 if (!$personalDataMovie)
 {
@@ -24,7 +24,7 @@ if (!$personalDataMovie)
 if (isset($_GET['id']))
 {
 	$movieId = (int)$_GET['id'];
-	$personalDataMovie = getMovieFromDbById($connecting_database, $movieId);
+	$personalDataMovie = MovieFromDbById($connecting_database, $movieId);
 	$rating = floor($personalDataMovie['RATING']);
 }
 else

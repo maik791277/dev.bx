@@ -10,18 +10,18 @@ require_once "./lib/helper-functions.php";
 require_once "./lib/template-functions.php";
 error_reporting(-1);
 $connecting_database = dbConnect($config);
-$genres = getGenresFromDB($connecting_database);
+$genres = GenresFromDB($connecting_database);
 $currentPage=$_SERVER['REQUEST_URI'];
 
 if (isset($_GET['genre']))
 {
 	$getGenres = $_GET['genre'];
-	$movies = getMovieFromDB($connecting_database,$genres,$getGenres);
+	$movies = MovieFromDB($connecting_database,$genres,$getGenres);
 }
 else
 {
 	$getGenres = '';
-	$movies = getMovieFromDB($connecting_database, $genres, $getGenres);
+	$movies = MovieFromDB($connecting_database, $genres, $getGenres);
 }
 if (isset($_GET['search']))
 {
