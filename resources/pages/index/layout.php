@@ -5,6 +5,7 @@
 /** @var array $movies */
 /** @var string $content */
 /** @var array $config */
+/** @var $getGenres */
 
 ?>
 
@@ -28,33 +29,19 @@
 			<li class="menu-item">
 				<a class="<?php if ($currentPage === $config['menu']['Главная']){echo 'active_zone';} ?>" href="<?= $config['menu']['Главная'] ?>">Главная</a>
 			</li>
-			<?php
-			foreach (array_slice($genres, 0, 2) as $key => $genre):?>
-				<li class="menu-item">
-					<a class="<?php if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php echo $genre ?></a>
-				</li>
-			<?php
-			endforeach; ?>
 			<li class="menu-item">
 				<input type="checkbox" class="expand-genres-button" id="expand-genres-button">
 				<label for="expand-genres-button" class="expand-genres-label">...</label>
 				<ul class="expandable-list">
 					<?php
-					foreach (array_slice($genres, 2, -1) as $key => $genre):?>
+					foreach ($genres as $key => $genre):?>
 						<li class="menu-item">
-							<a class="<?php if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php echo $genre ?></a>
+							<a class="<?php if ($getGenres === $genre["CODE"]){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php echo $genre["NAME"]?></a>
 						</li>
 					<?php
 					endforeach; ?>
 				</ul>
 			</li>
-			<?php
-			foreach (array_slice($genres, -1) as $key => $genre):?>
-				<li class="menu-item">
-					<a class="<?php if ($key === $current_page){echo 'active_zone';} ?>" href="/?genre=<?= $key ?>"><?php echo $genre ?></a>
-				</li>
-			<?php
-			endforeach; ?>
 			<li class="menu-item">
 				<a class="<?php if ($currentPage === $config['menu']['Избранные']){echo 'active_zone';} ?>" href="<?= $config['menu']['Избранные'] ?>">Избраное</a>
 			</li>
@@ -70,6 +57,9 @@
 			</form>
 		</div>
 		<div class="content">
+
+
+
 
 			<?= $content ?>
 
