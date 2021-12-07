@@ -13,7 +13,10 @@ function dbConnect(array $config)
 	$db_charset = mysqli_set_charset($db_init, $charset);
 	if ($db_connect === false || $db_charset === false)
 	{
-		trigger_error();
+		trigger_error('Ошибка подключения к БД', $error_level = E_USER_ERROR);
 	}
 	return $db_init;
+
+
+
 }

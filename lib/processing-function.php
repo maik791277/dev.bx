@@ -2,7 +2,8 @@
 
 
 
-function DataFromDb(): string
+
+function dataFromDb(): string
 {
 	return 'SELECT movie.ID,
        movie.TITLE,
@@ -20,53 +21,84 @@ function DataFromDb(): string
         FROM movie_actor AS ma
         WHERE ma.MOVIE_ID = movie.ID) AS id_actor
 FROM movie
-	     INNER JOIN director d on movie.DIRECTOR_ID = d.ID';
+         INNER JOIN movie_genre m on movie.ID = m.MOVIE_ID
+         INNER JOIN director d on movie.DIRECTOR_ID = d.ID';
 }
 
-function MovieFromDbById($db_res, $id): array
+function movieFromDBById($db_res, $id): array
 {
 	$result = [];
-	$query = DataFromDb() . "\n" . 'WHERE ' . $id . ' = movie.ID;';
+	$query = dataFromDb() . "\n" . 'WHERE ' . $id . ' = movie.ID;';
 	$mysqli_result = mysqli_query($db_res, $query);
 	if ($mysqli_result === false)
 	{
-		trigger_error();
+		trigger_error('Ошибка запроса на получение фильма по id.', $error_level = E_USER_ERROR);
 	}
 	while ($row = $mysqli_result->fetch_assoc())
 	{
-		$row["id_actor"] = NamesById($db_res, $row["id_actor"], ",");
+		$row["id_actor"] = namesById($db_res, $row["id_actor"], ",");
 		$result[$row["ID"]] = $row;
 	}
 	return call_user_func_array('array_merge', $result);
 }
-function MovieFromDB($db_res, array $genres, $genre): array
+function movieFromDB($db_res, array $genres, $genre, $db_connect): array
 {
 	$result = [];
-	$notFilteredGenre = DataFromDb();
-	$filteredGenre = DataFromDb() . "\n" . 'WHERE ' . $genre . ' IN (SELECT mg.GENRE_ID
-           FROM movie_genre AS mg
-           WHERE mg.MOVIE_ID = movie.ID);';
-	$query = $genre === "" ? $notFilteredGenre : $filteredGenre;
-
-	$mysqli_result = mysqli_query($db_res, $query);
+	if ($genre==='' or $genre == NULL)
+	{
+		$stmt = $db_connect->prepare(dataFromDb().';');
+	}
+	else
+	{
+		if (is_numeric($genre))
+		{
+			$filteredGenre = dataFromDb() . ' WHERE m.GENRE_ID=?;';
+		}
+		else
+		{
+			$filteredGenre = dataFromDb() . ' WHERE m.GENRE_CODE=?;';
+		}
+		$stmt = $db_connect->prepare($filteredGenre);
+		$stmt->bind_param('s', $genre); // 's' specifies the variable type => 'string'
+	}
+	$stmt->execute();
+	$mysqli_result = $stmt->get_result();
 	if ($mysqli_result === false)
 	{
-		trigger_error();
+		trigger_error("Список фильмов по выбранному жанру не доступен", E_USER_ERROR);
 	}
 	while ($row = $mysqli_result->fetch_assoc())
 	{
-		$row["id_genres"] = NamesByGenres($genres, $row["id_genres"], ",");
+		$row["id_genres"] = namesByGenres($genres, $row["id_genres"], ",");
 		$result[$row["ID"]] = $row;
 	}
 	return $result;
 }
-function NamesById($db_res, string $id, string $separator): array
+function searchMovieInDB($db_res, $genres, $search_name, $db_connect): array {
+	$result = [];
+	$likeString = '%' . $search_name . '%';
+	$stmt = $db_connect->prepare(dataFromDb()." WHERE movie.TITLE LIKE ?;");
+	$stmt->bind_param("s", $likeString);
+	$stmt->execute();
+	$mysqli_result = $stmt->get_result();
+	if ($mysqli_result === false)
+	{
+		trigger_error("Список фильмов по имени не доступен", E_USER_ERROR);
+	}
+	while ($row = $mysqli_result->fetch_assoc())
+	{
+		$row["id_genres"] = namesByGenres($genres, $row["id_genres"], ",");
+		$result[$row["ID"]] = $row;
+	}
+	return $result;
+}
+function namesById($db_res, string $id, string $separator): array
 {
 	$explodeArray = explode($separator, $id);
 	$query = 'SELECT * from actor;';
 	$mysqli_result = mysqli_query($db_res, $query);
 	if ($mysqli_result === false){
-		trigger_error();}
+		trigger_error('Ошибка запроса на получение имени актёра id.', $error_level = E_USER_ERROR);}
 	while ($actor = $mysqli_result->fetch_assoc()){
 		$a[] = $actor;}
 	foreach ($explodeArray as &$value){
@@ -75,13 +107,13 @@ function NamesById($db_res, string $id, string $separator): array
 	return $explodeArray;
 }
 
-function GenresFromDB($db_res): array
+function genresFromDB($db_res): array
 {
 	$query = "SELECT * FROM GENRE;";
 	$mysqli_result = mysqli_query($db_res, $query);
 	if ($mysqli_result === false)
 	{
-		trigger_error();
+		trigger_error('Ошибка запроса на получение жанра.', $error_level = E_USER_ERROR);;
 	}
 	$result = [];
 	while ($row = $mysqli_result->fetch_assoc())
@@ -92,7 +124,7 @@ function GenresFromDB($db_res): array
 }
 
 
-function NamesByGenres($gen, string $id, string $separator): array
+function namesByGenres($gen, string $id, string $separator): array
 {
 	$explodeArray = explode($separator, $id);
 	foreach ($explodeArray as &$value)
